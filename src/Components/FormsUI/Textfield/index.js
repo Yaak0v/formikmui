@@ -11,6 +11,11 @@ const TextFieldWrapper = ({ name, ...otherProps }) => {
     variant: "outlined",
   };
 
+  if (mata && mata.touched && mata.error) {
+    configTextField.error = true;
+    configTextField.helperText = mata.error;
+  }
+
   return <TextField {...configTextField} />;
 };
 
