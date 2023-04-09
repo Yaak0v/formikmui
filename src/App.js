@@ -7,6 +7,8 @@ import { Container, Grid, Typography } from "@material-ui/core";
 import Textfield from "./Components/FormsUI/Textfield";
 import Select from "./Components/FormsUI/Select";
 import countries from "./data/countries.json";
+import DateTimePicker from "./Components/FormsUI/DataTimePicker";
+import Checkbbox from "./Components/FormsUI/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -25,6 +27,10 @@ const INITIAL_FORM_STATE = {
   city: "",
   state: "",
   country: "",
+  arrivalDate: "",
+  departureDate: "",
+  message: "",
+  termsOfService: "",
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -35,10 +41,12 @@ const FORM_VALIDATION = Yup.object().shape({
   addressLine2: Yup.string(),
   city: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
-
-  // phone: Yup.number()
-  //   .integer
-  //   .required("Required"),
+  arrivalDate: Yup.date().required("Required"),
+  departureDate: Yup.date().required("Required"),
+  message: Yup.string().required("Required"),
+  termsOfService: Yup.boolean()
+    .oneOf([true], "The terms must be accepted.")
+    .required("The terms must be accepted."),
 });
 
 const App = () => {
@@ -102,6 +110,28 @@ const App = () => {
 
                   <Grid item xs={12}>
                     <Typography>Booking Information</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <DateTimePicker name="arrivalDate" label="Arrival Date" />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <DateTimePicker
+                      name="departureDate"
+                      label="Departure Date"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Textfield
+                      name="message"
+                      label="Message"
+                      multiline={true}
+                      rows={4}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                  <Checkbbox name="termsOfService"
+                  legend="Terms of Service"
+                  label="I agree"/>
                   </Grid>
                 </Grid>
               </Form>

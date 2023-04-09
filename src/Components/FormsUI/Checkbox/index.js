@@ -14,14 +14,13 @@ const CheckboxWrapper = ({
   legend,
   ...otherProps
 }) => {
+
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
-
-  const handleChange = evt => {
-    const { checked } = evt.target;
+  const handleChange = event => {
+    const { checked } = event.target;
     setFieldValue(name, checked);
-  };
-
+  }
   const configCheckbox = {
     ...field,
     onChange: handleChange
@@ -36,13 +35,10 @@ const CheckboxWrapper = ({
     <FormControl {...configFormControl}>
       <FormLabel component="legend">{legend}</FormLabel>
       <FormGroup>
-        <FormControlLabel
-          control={<Checkbox {...configCheckbox} />}
-          label={label}
-        />
+        <FormControlLabel control={<Checkbox {...configCheckbox}/>} label={label}/>
       </FormGroup>
     </FormControl>
-  );
-};
+  )
+}
 
-export default CheckboxWrapper;
+export default CheckboxWrapper
